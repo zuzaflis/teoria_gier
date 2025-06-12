@@ -86,6 +86,7 @@ class Animal:
         self.y = y
         self.animal_type = animal_type
         self.age = 0 # Wiek (dla drapieżników i  dla ofiar do rozmnażania)
+        self.mutation_rate = 0.1 
 
 
         # --- Atrybuty i logika Ofiar (typ 'prey') ---
@@ -138,6 +139,13 @@ class Animal:
         if self.animal_type == 'prey':
             return PREY_SOUND_EMISSION_AMOUNT #
         return 0
+
+    def eat_food(self):
+        #---------------------------Ofiara je pożywienie------------------------------
+        if self.animal_type == 'prey':
+            self.energy = min(self.energy + self.energy_gain_per_food, self.max_energy)
+            return True
+        return False
 
     def move(self, grid_width, grid_height, smell_grid=None, all_animals_list=None):
         #---------------------------Ruch zwierzęcia------------------------------
